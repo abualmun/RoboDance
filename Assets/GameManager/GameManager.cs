@@ -18,12 +18,16 @@ public class GameManager : MonoBehaviour
 
     // Components ///////////////
     [SerializeField] GameObject[] wallPrefabs;
+    [SerializeField] GameObject[] powerups;
+
     [SerializeField] float respawnPosition;
     AudioSource audioSource;
 
     // Levels /////
     public int level = 1;
     public bool gameOver;
+    public bool hasExtraLife;
+    public bool hasSlowTime;
     // int maxEnemies;
     // float spawnCooldown;
     // float spawnTimer;
@@ -35,16 +39,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject loseMenu;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text finalScoreText;
-    [SerializeField] GameObject slowTimeButton;
+    public GameObject slowTimeButton;
 
     ///////////////////////////////////
     public List<GameObject> walls = new List<GameObject>();
+
     // [SerializeField] GameObject dangerPrefab;
 
     // public List<GameObject> currentPowerups = new List<GameObject>();
     public static GameManager gameManager;
     [SerializeField] AudioClip click;
+    int powerupsCount;
     int wallsCount;
+    bool extraLifeCooldown;
 
     private void Awake()
     {
@@ -99,6 +106,13 @@ public class GameManager : MonoBehaviour
             // spawnTimer = spawnCooldown;
         }
 
+        if (powerupsCount < wallsCount)
+        {
+            powerupsCount++;
+            Instantiate(powerups[Random.Range(0, powerups.Length)],
+            new Vector3(Random.Range(-2, 2), 0.6f, Random.Range(63, 78)),
+            Quaternion.identity);
+        }
         // cam.m_Lens.OrthographicSize = Mathf.Clamp(player.GetComponent<Rigidbody2D>().velocity.magnitude, 7, 9);
     }
     void LevelUp()
@@ -107,6 +121,7 @@ public class GameManager : MonoBehaviour
     }
     public void UseSlowTime()
     {
+        slowTimeButton.SetActive(false);
         StartCoroutine(SlowTime());
     }
     IEnumerator SlowTime()
@@ -117,7 +132,17 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         Time.fixedDeltaTime *= 2f;
     }
-
+    public void GetExtraLife()
+    {
+        hasExtraLife = true;
+    }
+    IEnumerator ExtraLifeEffect()
+    {
+        extraLifeCooldown = true;
+        yield return new WaitForSeconds(2);
+        hasExtraLife = false;
+        extraLifeCooldown = false;
+    }
     public void AddWallScore()
     {
         score += 500;
@@ -132,6 +157,13 @@ public class GameManager : MonoBehaviour
     }
     public void EndGame()
     {
+        if (hasExtraLife)
+        {
+            if (!extraLifeCooldown)
+                StartCoroutine(ExtraLifeEffect());
+            return;
+        }
+        level = -7;
         if (MainMenu.highScore < score)
         {
             MainMenu.highScore = (int)score;

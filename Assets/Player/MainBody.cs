@@ -75,6 +75,24 @@ public class MainBody : MonoBehaviour
         joint.position = new Vector3(Mathf.Clamp(mousePosition.x, xBorders.x, xBorders.y), joint.position.y, joint.position.z);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            GameManager.gameManager.EndGame();
+        }
+        if (other.CompareTag("ExtraLife"))
+        {
+            Destroy(other.gameObject);
+            GameManager.gameManager.GetExtraLife();
+        }
+        if (other.CompareTag("SlowTime"))
+        {
+            Destroy(other.gameObject);
+            GameManager.gameManager.hasSlowTime = true;
+            GameManager.gameManager.slowTimeButton.SetActive(true);
 
+        }
+    }
 }
 

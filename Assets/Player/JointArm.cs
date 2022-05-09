@@ -74,10 +74,14 @@ public class JointArm : MonoBehaviour
         }
         if (other.CompareTag("ExtraLife"))
         {
-
+            Destroy(other.gameObject);
+            GameManager.gameManager.GetExtraLife();
         }
         if (other.CompareTag("SlowTime"))
         {
+            Destroy(other.gameObject);
+            GameManager.gameManager.hasSlowTime = true;
+            GameManager.gameManager.slowTimeButton.SetActive(true);
 
         }
     }

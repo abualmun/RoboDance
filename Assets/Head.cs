@@ -23,10 +23,13 @@ public class Head : MonoBehaviour
         }
         if (other.CompareTag("ExtraLife"))
         {
-
+            Destroy(other.gameObject);
+            GameManager.gameManager.GetExtraLife();
         }
         if (other.CompareTag("SlowTime"))
         {
+            Destroy(other.gameObject);
+            GameManager.gameManager.UseSlowTime();
 
         }
     }

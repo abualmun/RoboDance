@@ -73,13 +73,13 @@ public class Joint : MonoBehaviour
         if (other.CompareTag("ExtraLife"))
         {
             Destroy(other.gameObject);
-            GameManager.gameManager.
+            GameManager.gameManager.GetExtraLife();
         }
         if (other.CompareTag("SlowTime"))
         {
             Destroy(other.gameObject);
-            GameManager.gameManager.UseSlowTime();
-
+            GameManager.gameManager.hasSlowTime = true;
+            GameManager.gameManager.slowTimeButton.SetActive(true);
         }
     }
 }
