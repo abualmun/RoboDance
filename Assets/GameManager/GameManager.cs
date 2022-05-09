@@ -7,10 +7,6 @@ using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
-    // [SerializeField] int maxPowerups;
-    // [SerializeField] float powerupSpawnRadius;
-    // [SerializeField] float powerupSpawnCooldown;
-    // float powerupSpawnTimer;
     bool gamePaused;
     public float score;
     float highScore;
@@ -28,10 +24,6 @@ public class GameManager : MonoBehaviour
     public bool gameOver;
     public bool hasExtraLife;
     public bool hasSlowTime;
-    // int maxEnemies;
-    // float spawnCooldown;
-    // float spawnTimer;
-    // [SerializeField] float enemySpawnRadius;
     Vector3 defaultLeveltextHight;
     // UI Components///////////////////
     [SerializeField] GameObject pauseMenu;
@@ -43,28 +35,16 @@ public class GameManager : MonoBehaviour
 
     ///////////////////////////////////
     public List<GameObject> walls = new List<GameObject>();
-
-    // [SerializeField] GameObject dangerPrefab;
-
-    // public List<GameObject> currentPowerups = new List<GameObject>();
     public static GameManager gameManager;
     [SerializeField] AudioClip click;
     int powerupsCount;
     int wallsCount;
     bool extraLifeCooldown;
 
-    private void Awake()
-    {
-        // Time.timeScale = 1;
-        // Time.fixedDeltaTime = 0.02f;
-    }
+
     void Start()
     {
         gameManager = this;
-        // player = Player.player;
-        // maxEnemies = level * 4;
-        // spawnCooldown = 10;
-
         GameObject newWall = Instantiate(
         wallPrefabs[Random.Range(0, wallPrefabs.Length)],
         new Vector3(Random.Range(-2.5f, 2.5f), 0.6f, 40),
@@ -75,21 +55,16 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (gameOver) return;
         if (Input.GetKeyDown(KeyCode.Escape)) TogglePause();
-        // Debug.DrawRay(player.transform.position, Vector3.right * enemySpawnRadius);
 
-        // score += Time.deltaTime * 3;
         scoreText.text = "Score: " + (int)score;
         if (wallsCount > level * 5)
         {
             LevelUp();
         }
-
-        // spawnTimer -= Time.deltaTime;
 
         if (walls[walls.Count - 1].transform.position.z <= respawnPosition)
         {
@@ -101,9 +76,6 @@ public class GameManager : MonoBehaviour
             walls.Add(newWall);
 
             wallsCount -= -1;
-
-            // enemy.transform.LookAt(player.transform);
-            // spawnTimer = spawnCooldown;
         }
 
         if (powerupsCount < wallsCount)
@@ -113,7 +85,6 @@ public class GameManager : MonoBehaviour
             new Vector3(Random.Range(-2, 2), 0.6f, Random.Range(63, 78)),
             Quaternion.identity);
         }
-        // cam.m_Lens.OrthographicSize = Mathf.Clamp(player.GetComponent<Rigidbody2D>().velocity.magnitude, 7, 9);
     }
     void LevelUp()
     {
