@@ -68,6 +68,10 @@ public class MainBody : MonoBehaviour
     void MovePlayer()
     {
         Vector3 mousePosition = Input.mousePosition;
+        if (Input.touchCount > 0)
+        {
+            mousePosition = Input.touches[0].position;
+        }
         mousePosition.z = zOffset;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 

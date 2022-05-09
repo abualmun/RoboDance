@@ -57,6 +57,10 @@ public class RightLeg : MonoBehaviour
     void RotateSelectedJoint()
     {
         Vector3 mousePosition = Input.mousePosition;
+        if (Input.touchCount > 0)
+        {
+            mousePosition = Input.touches[0].position;
+        }
         mousePosition.z = zOffset;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
