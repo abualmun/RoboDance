@@ -6,14 +6,14 @@ using UnityEngine.Events;
 public class LeftArm : MonoBehaviour
 {
     // parameters /////////////////////////////////////
-    [SerializeField] float zOffset;
+    float zOffset;
     [SerializeField] Vector2 clamp;
 
     // private vars /////////////////////////////////////
 
 
     // status bools //////////////////////////////////
-    [SerializeField] bool isHeld;
+    public bool isHeld;
 
 
     // Components /////////////////////////////////////
@@ -28,7 +28,7 @@ public class LeftArm : MonoBehaviour
 
     void Start()
     {
-
+        zOffset = GameManager.gameManager.zOffset;
     }
 
     // Update is called once per frame

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainBody : MonoBehaviour
 {
     // parameters /////////////////////////////////////
-    [SerializeField] float zOffset;
+    float zOffset;
     [SerializeField] Vector2 xBorders;
 
     // private vars /////////////////////////////////////
@@ -13,7 +13,7 @@ public class MainBody : MonoBehaviour
     float yDefaultPosition;
 
     // status bools //////////////////////////////////
-    [SerializeField] bool isHeld;
+    public bool isHeld;
 
 
     // Components /////////////////////////////////////
@@ -30,6 +30,7 @@ public class MainBody : MonoBehaviour
 
     void Start()
     {
+        zOffset = GameManager.gameManager.zOffset;
         yDiffrence = joint.position.y - lLeg.position.y + 0.126f;
         yDefaultPosition = joint.position.y - yDiffrence;
     }

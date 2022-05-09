@@ -6,29 +6,19 @@ using UnityEngine.Events;
 public class LeftLeg : MonoBehaviour
 {
     // parameters /////////////////////////////////////
-    [SerializeField] float zOffset;
+    float zOffset;
     [SerializeField] Vector2 clamp;
-
-    // private vars /////////////////////////////////////
-
-
     // status bools //////////////////////////////////
-    [SerializeField] bool isHeld;
-
-
+    public bool isHeld;
     // Components /////////////////////////////////////
     [SerializeField] Transform joint;
-
-    // powerups/////////////////////////
-
-
     // Debug //////////////////////////////////////////
     [SerializeField] Vector2 debug;
     [SerializeField] float error;
 
     void Start()
     {
-
+        zOffset = GameManager.gameManager.zOffset;
     }
 
     // Update is called once per frame

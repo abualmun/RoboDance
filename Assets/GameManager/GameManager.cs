@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public float score;
     float highScore;
     [SerializeField] float slowTimePeriod;
+    public float zOffset = 1.05f;
 
     // Components ///////////////
     [SerializeField] GameObject[] wallPrefabs;
@@ -40,11 +41,14 @@ public class GameManager : MonoBehaviour
     int powerupsCount;
     int wallsCount;
     bool extraLifeCooldown;
+    public bool slowMotionBool;
 
-
-    void Start()
+    private void Awake()
     {
         gameManager = this;
+    }
+    void Start()
+    {
         GameObject newWall = Instantiate(
         wallPrefabs[Random.Range(0, wallPrefabs.Length)],
         new Vector3(Random.Range(-2.5f, 2.5f), 0.6f, 40),
@@ -97,11 +101,9 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator SlowTime()
     {
-        Time.timeScale = 0.5f;
-        Time.fixedDeltaTime *= 0.5f;
+        slowMotionBool = true;
         yield return new WaitForSeconds(slowTimePeriod);
-        Time.timeScale = 1;
-        Time.fixedDeltaTime *= 2f;
+        slowMotionBool = false;
     }
     public void GetExtraLife()
     {
