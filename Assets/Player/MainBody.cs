@@ -55,6 +55,7 @@ public class MainBody : MonoBehaviour
         if (isHeld)
         {
             MovePlayer();
+            GameManager.gameManager.returnTimer = 3;
         }
         else
         {

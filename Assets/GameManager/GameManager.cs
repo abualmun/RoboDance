@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
             wallsCount -= -1;
         }
 
-        if (powerupsCount < wallsCount)
+        if (powerupsCount * 5 < wallsCount)
         {
             powerupsCount++;
             Instantiate(powerups[Random.Range(0, powerups.Length)],
