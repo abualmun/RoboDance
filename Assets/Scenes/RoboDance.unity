@@ -1027,6 +1027,7 @@ MonoBehaviour:
   rLeg: {fileID: 940256918}
   debug: {x: -2.25, y: 2.25}
   error: 0
+  jumpHight: 0.4
 --- !u!1 &420378525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,7 +1329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   slowTimePeriod: 3
-  zOffset: 1.05
+  zOffset: 3.25
   wallPrefabs:
   - {fileID: 5768415090369607455, guid: b5971b7b2ebfb234bb67bf2c0e9d4fd9, type: 3}
   powerups:
@@ -1348,6 +1349,8 @@ MonoBehaviour:
   walls: []
   click: {fileID: 8300000, guid: 03593349a2612ee43b4be41768e8720a, type: 3}
   slowMotionBool: 0
+  isJumping: 0
+  returnTimer: 0
 --- !u!4 &474756949
 Transform:
   m_ObjectHideFlags: 0
@@ -3963,8 +3966,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313833187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.101, z: -3.06}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0.8, z: -0.739}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1647835520}

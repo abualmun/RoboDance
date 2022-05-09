@@ -25,10 +25,12 @@ public class RightArm : MonoBehaviour
     // Debug //////////////////////////////////////////
     [SerializeField] Vector2 debug;
     [SerializeField] float error;
+    Quaternion defaultAngle;
 
     void Start()
     {
         zOffset = GameManager.gameManager.zOffset;
+        defaultAngle = joint.rotation;
     }
 
     // Update is called once per frame
@@ -37,10 +39,14 @@ public class RightArm : MonoBehaviour
         if (isHeld)
         {
             RotateSelectedJoint();
+            GameManager.gameManager.returnTimer = 3;
         }
         else
         {
-
+            if (GameManager.gameManager.returnTimer < 0)
+            {
+                joint.rotation = Quaternion.RotateTowards(joint.rotation, defaultAngle, 3);
+            }
         }
 
     }
@@ -89,4 +95,7 @@ public class RightArm : MonoBehaviour
 
         }
     }
+
+
+
 }

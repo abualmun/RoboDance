@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     int wallsCount;
     bool extraLifeCooldown;
     public bool slowMotionBool;
+    public bool isJumping;
+    public float returnTimer;
 
     private void Awake()
     {
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
             new Vector3(Random.Range(-2, 2), 0.6f, Random.Range(63, 78)),
             Quaternion.identity);
         }
+        returnTimer -= Time.deltaTime;
     }
     void LevelUp()
     {

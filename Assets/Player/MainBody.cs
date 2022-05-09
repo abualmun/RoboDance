@@ -27,6 +27,8 @@ public class MainBody : MonoBehaviour
     // Debug //////////////////////////////////////////
     [SerializeField] Vector2 debug;
     [SerializeField] float error;
+    [SerializeField] float jumpHight;
+
 
     void Start()
     {
@@ -38,6 +40,10 @@ public class MainBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.gameManager.isJumping)
+        {
+            return;
+        }
         debug = new Vector2(lLeg.rotation.eulerAngles.z - 270, 90 - rLeg.rotation.eulerAngles.z);
         float leftAngleFix = lLeg.rotation.eulerAngles.z;
         if (lLeg.rotation.eulerAngles.z == 0)
@@ -98,6 +104,28 @@ public class MainBody : MonoBehaviour
             GameManager.gameManager.slowTimeButton.SetActive(true);
 
         }
+    }
+
+    public void StartJump()
+    {
+        StartCoroutine(Jump());
+    }
+    IEnumerator Jump()
+    {
+        GameManager.gameManager.isJumping = true;
+        Vector3 defaultPosition = joint.position;
+        while (Vector3.Distance(joint.position, defaultPosition + Vector3.up * jumpHight) > 0.01f)
+        {
+            joint.position = Vector3.MoveTowards(joint.position, defaultPosition + Vector3.up * jumpHight, .02f);
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSeconds(2f);
+        while (Vector3.Distance(joint.position, defaultPosition) > 0.01f)
+        {
+            joint.position = Vector3.MoveTowards(joint.position, defaultPosition, 0.02f);
+            yield return new WaitForEndOfFrame();
+        }
+        GameManager.gameManager.isJumping = false;
     }
 }
 
