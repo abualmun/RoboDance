@@ -30,7 +30,7 @@ public class MainBody : MonoBehaviour
 
     void Start()
     {
-        yDiffrence = joint.position.y - lLeg.position.y;
+        yDiffrence = joint.position.y - lLeg.position.y + 0.126f;
         yDefaultPosition = joint.position.y - yDiffrence;
     }
 
@@ -43,7 +43,7 @@ public class MainBody : MonoBehaviour
         {
             leftAngleFix = 360;
         }
-        joint.position = new Vector3(joint.position.x, ((Mathf.Max(leftAngleFix - 270, 90 - rLeg.rotation.eulerAngles.z)) / 90) * yDiffrence + yDefaultPosition, joint.position.z);
+        joint.position = new Vector3(joint.position.x, Mathf.Sin(Mathf.Deg2Rad * (Mathf.Max(leftAngleFix - 270, 90 - rLeg.rotation.eulerAngles.z))) * yDiffrence + yDefaultPosition, joint.position.z);
 
         if (isHeld)
         {

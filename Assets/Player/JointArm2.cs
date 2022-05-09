@@ -72,4 +72,19 @@ public class JointArm2 : MonoBehaviour
         joint.localRotation = Quaternion.Euler(0, 0, angle + error);
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            GameManager.gameManager.EndGame();
+        }
+        if (other.CompareTag("ExtraLife"))
+        {
+
+        }
+        if (other.CompareTag("SlowTime"))
+        {
+
+        }
+    }
 }

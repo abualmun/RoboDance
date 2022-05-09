@@ -64,4 +64,22 @@ public class Joint : MonoBehaviour
 
         joint.localRotation = Quaternion.Euler(0, 0, Mathf.Clamp(angle + error, clamp.x, clamp.y));
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            GameManager.gameManager.EndGame();
+        }
+        if (other.CompareTag("ExtraLife"))
+        {
+            Destroy(other.gameObject);
+            GameManager.gameManager.
+        }
+        if (other.CompareTag("SlowTime"))
+        {
+            Destroy(other.gameObject);
+            GameManager.gameManager.UseSlowTime();
+
+        }
+    }
 }

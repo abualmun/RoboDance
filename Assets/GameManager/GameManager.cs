@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
         GameObject newWall = Instantiate(
         wallPrefabs[Random.Range(0, wallPrefabs.Length)],
-        new Vector3(Random.Range(-4, 4), 0.6f, 40),
+        new Vector3(Random.Range(-2.5f, 2.5f), 0.6f, 40),
         Quaternion.identity
         );
         walls.Add(newWall);
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) TogglePause();
         // Debug.DrawRay(player.transform.position, Vector3.right * enemySpawnRadius);
 
-        score += Time.deltaTime * 3;
+        // score += Time.deltaTime * 3;
         scoreText.text = "Score: " + (int)score;
         if (wallsCount > level * 5)
         {
@@ -117,6 +117,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         Time.fixedDeltaTime *= 2f;
     }
+
+    public void AddWallScore()
+    {
+        score += 500;
+    }
+
     public void TogglePause()
     {
         playMenu.SetActive(gamePaused);

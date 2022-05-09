@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class moveObjects : MonoBehaviour
 {
+    [SerializeField] float playerZPosition = -1.16f;
+    bool scoreWasAdded;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,11 @@ public class moveObjects : MonoBehaviour
         {
             Destroy(this.gameObject);
             GameManager.gameManager.walls.RemoveAt(0);
+        }
+        if (transform.position.z <= playerZPosition && !scoreWasAdded)
+        {
+            GameManager.gameManager.AddWallScore();
+            scoreWasAdded = true;
         }
     }
 }

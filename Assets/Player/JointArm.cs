@@ -66,4 +66,19 @@ public class JointArm : MonoBehaviour
         if (joint.localRotation.eulerAngles.z > clamp.x || joint.localRotation.eulerAngles.z < clamp.y)
             joint.localRotation = Quaternion.Euler(0, 0, Mathf.Clamp(angle + error, -70, 90));
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            GameManager.gameManager.EndGame();
+        }
+        if (other.CompareTag("ExtraLife"))
+        {
+
+        }
+        if (other.CompareTag("SlowTime"))
+        {
+
+        }
+    }
 }

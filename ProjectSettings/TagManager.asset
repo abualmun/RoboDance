@@ -7,6 +7,9 @@ TagManager:
   - Immortal
   - SlowEnemies
   - Enemy
+  - Wall
+  - ExtraLife
+  - SlowTime
   layers:
   - Default
   - TransparentFX
