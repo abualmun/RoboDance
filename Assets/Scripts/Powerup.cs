@@ -17,11 +17,11 @@ public class Powerup : MonoBehaviour
     {
         if (GameManager.gameManager.slowMotionBool)
         {
-            transform.Translate(Vector3.back * startSpeed / 2);
+            transform.Translate((Vector3.back * startSpeed / 2) * Time.deltaTime);
         }
         else
         {
-            transform.Translate(Vector3.back * (startSpeed + accelerationPerLevel * GameManager.gameManager.level));
+            transform.Translate(Vector3.back * (startSpeed + accelerationPerLevel * GameManager.gameManager.level) * Time.deltaTime);
         }
         if (transform.position.z <= -5)
         {
