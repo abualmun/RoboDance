@@ -54,10 +54,12 @@ public class RightArm : MonoBehaviour
     private void OnMouseDown()
     {
         isHeld = true;
+        GetComponent<TrailRenderer>().enabled = true;
     }
     private void OnMouseUp()
     {
         isHeld = false;
+        GetComponent<TrailRenderer>().enabled = false;
     }
 
     void RotateSelectedJoint()
@@ -93,6 +95,12 @@ public class RightArm : MonoBehaviour
             GameManager.gameManager.hasSlowTime = true;
             GameManager.gameManager.slowTimeButton.SetActive(true);
 
+        }
+        if (other.CompareTag("Orb"))
+        {
+            Destroy(other.gameObject);
+            GameManager.gameManager.score += 200;
+            GameManager.gameManager.scoreMultiplier += 10;
         }
     }
 

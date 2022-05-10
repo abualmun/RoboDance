@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-using Cinemachine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject loseMenu;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text finalScoreText;
+    [SerializeField] GameObject extraLife;
+    [SerializeField] TMP_Text scoreMultiplierText;
+    [SerializeField] Image scoreMultiplierImage;
     public GameObject slowTimeButton;
 
     ///////////////////////////////////
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour
     public bool slowMotionBool;
     public bool isJumping;
     public float returnTimer;
+    public float scoreMultiplier;
 
     private void Awake()
     {
@@ -65,7 +69,12 @@ public class GameManager : MonoBehaviour
     {
         if (gameOver) return;
         if (Input.GetKeyDown(KeyCode.Escape)) TogglePause();
-
+        if (scoreMultiplier > 0)
+        {
+            scoreMultiplier -= Time.deltaTime;
+        }
+        scoreMultiplierImage.fillAmount = (scoreMultiplier % 24) / 24;
+        scoreMultiplierText.text = "x" + ((int)(scoreMultiplier / 24)).ToString();
         scoreText.text = "Score: " + (int)score;
         if (wallsCount > level * 5)
         {
@@ -84,7 +93,7 @@ public class GameManager : MonoBehaviour
             wallsCount -= -1;
         }
 
-        if (powerupsCount * 5 < wallsCount)
+        if (powerupsCount * 3 < wallsCount)
         {
             powerupsCount++;
             Instantiate(powerups[Random.Range(0, powerups.Length)],
@@ -92,6 +101,7 @@ public class GameManager : MonoBehaviour
             Quaternion.identity);
         }
         returnTimer -= Time.deltaTime;
+        extraLife.SetActive(hasExtraLife);
     }
     void LevelUp()
     {
@@ -121,7 +131,7 @@ public class GameManager : MonoBehaviour
     }
     public void AddWallScore()
     {
-        score += 500;
+        score += 500 * (int)(scoreMultiplier / 24);
     }
 
     public void TogglePause()

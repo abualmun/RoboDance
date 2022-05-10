@@ -40,6 +40,7 @@ public class LeftArm : MonoBehaviour
         {
             RotateSelectedJoint();
             GameManager.gameManager.returnTimer = 3;
+
         }
         else
         {
@@ -54,10 +55,12 @@ public class LeftArm : MonoBehaviour
     private void OnMouseDown()
     {
         isHeld = true;
+        GetComponent<TrailRenderer>().enabled = true;
     }
     private void OnMouseUp()
     {
         isHeld = false;
+        GetComponent<TrailRenderer>().enabled = false;
     }
 
     void RotateSelectedJoint()
@@ -99,6 +102,12 @@ public class LeftArm : MonoBehaviour
             GameManager.gameManager.hasSlowTime = true;
             GameManager.gameManager.slowTimeButton.SetActive(true);
 
+        }
+        if (other.CompareTag("Orb"))
+        {
+            Destroy(other.gameObject);
+            GameManager.gameManager.score += 200;
+            GameManager.gameManager.scoreMultiplier += 10;
         }
     }
 }

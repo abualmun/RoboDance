@@ -28,6 +28,7 @@ public class MainBody : MonoBehaviour
     [SerializeField] Vector2 debug;
     [SerializeField] float error;
     [SerializeField] float jumpHight;
+    [SerializeField] float jumpInAirTime;
 
 
     void Start()
@@ -67,10 +68,12 @@ public class MainBody : MonoBehaviour
     private void OnMouseDown()
     {
         isHeld = true;
+        GetComponent<TrailRenderer>().enabled = true;
     }
     private void OnMouseUp()
     {
         isHeld = false;
+        GetComponent<TrailRenderer>().enabled = false;
     }
 
     void MovePlayer()
@@ -105,6 +108,12 @@ public class MainBody : MonoBehaviour
             GameManager.gameManager.slowTimeButton.SetActive(true);
 
         }
+        if (other.CompareTag("Orb"))
+        {
+            Destroy(other.gameObject);
+            GameManager.gameManager.score += 200;
+            GameManager.gameManager.scoreMultiplier += 10;
+        }
     }
 
     public void StartJump()
@@ -120,7 +129,7 @@ public class MainBody : MonoBehaviour
             joint.position = Vector3.MoveTowards(joint.position, defaultPosition + Vector3.up * jumpHight, .02f);
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(jumpInAirTime);
         while (Vector3.Distance(joint.position, defaultPosition) > 0.01f)
         {
             joint.position = Vector3.MoveTowards(joint.position, defaultPosition, 0.02f);
