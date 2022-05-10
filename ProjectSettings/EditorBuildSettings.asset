@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 157f538d876c5ee49a903308791dcf32
   - enabled: 1
-    path: Assets/Scenes/Play.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/RoboDance.unity
+    guid: 6d8e2fa22cfafa74d9a3900fa6ca85cd
   m_configObjects: {}

@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
     ///////////////////////////////////
     public List<GameObject> walls = new List<GameObject>();
     public static GameManager gameManager;
-    [SerializeField] AudioClip click;
     int powerupsCount;
     int wallsCount;
     bool extraLifeCooldown;
@@ -74,7 +73,7 @@ public class GameManager : MonoBehaviour
             scoreMultiplier -= Time.deltaTime;
         }
         scoreMultiplierImage.fillAmount = (scoreMultiplier % 24) / 24;
-        scoreMultiplierText.text = "x" + ((int)(scoreMultiplier / 24)).ToString();
+        scoreMultiplierText.text = "x" + ((int)(scoreMultiplier / 24) + 1).ToString();
         scoreText.text = "Score: " + (int)score;
         if (wallsCount > level * 5)
         {
@@ -101,7 +100,6 @@ public class GameManager : MonoBehaviour
             Quaternion.identity);
         }
         returnTimer -= Time.deltaTime;
-        extraLife.SetActive(hasExtraLife);
     }
     void LevelUp()
     {
@@ -120,18 +118,28 @@ public class GameManager : MonoBehaviour
     }
     public void GetExtraLife()
     {
+        extraLife.SetActive(true);
+
         hasExtraLife = true;
     }
     IEnumerator ExtraLifeEffect()
     {
         extraLifeCooldown = true;
-        yield return new WaitForSeconds(2);
+        extraLife.SetActive(false);
+        yield return new WaitForSeconds(0.25f);
+        extraLife.SetActive(true);
+        yield return new WaitForSeconds(0.25f);
+        extraLife.SetActive(false);
+        yield return new WaitForSeconds(0.25f);
+        extraLife.SetActive(true);
+        yield return new WaitForSeconds(0.25f);
+        extraLife.SetActive(false);
         hasExtraLife = false;
         extraLifeCooldown = false;
     }
     public void AddWallScore()
     {
-        score += 500 * (int)(scoreMultiplier / 24);
+        score += 500 * ((int)(scoreMultiplier / 24) + 1);
     }
 
     public void TogglePause()
@@ -177,6 +185,6 @@ public class GameManager : MonoBehaviour
     }
     public void ClickSound()
     {
-        // audioSource.PlayOneShot(click);
+        // audioSource.PlayOneShot(clock);
     }
 }

@@ -13,7 +13,13 @@ public class MouseSwipeDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (la.isHeld || ra.isHeld || ll.isHeld || rl.isHeld || mb.isHeld) return;
+
+        if (la.isHeld || ra.isHeld || ll.isHeld || rl.isHeld || mb.isHeld)
+        {
+            secondPressPos = firstPressPos;
+            currentSwipe = Vector2.zero;
+            return;
+        }
         Swipe();
     }
 

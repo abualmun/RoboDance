@@ -1220,6 +1220,7 @@ MonoBehaviour:
   debug: {x: -2.25, y: 2.25}
   error: 0
   jumpHight: 0.4
+  jumpInAirTime: 2
 --- !u!96 &419644496
 TrailRenderer:
   serializedVersion: 2
@@ -1713,9 +1714,9 @@ GameObject:
   m_Component:
   - component: {fileID: 474756949}
   - component: {fileID: 474756948}
-  - component: {fileID: 474756950}
   - component: {fileID: 474756951}
   - component: {fileID: 474756952}
+  - component: {fileID: 474756953}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1768,7 +1769,6 @@ MonoBehaviour:
   scoreMultiplierImage: {fileID: 982572207}
   slowTimeButton: {fileID: 430933069}
   walls: []
-  click: {fileID: 8300000, guid: 03593349a2612ee43b4be41768e8720a, type: 3}
   slowMotionBool: 0
   isJumping: 0
   returnTimer: 0
@@ -1788,7 +1788,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &474756950
+--- !u!114 &474756951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474756947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10f75560348c46949b0567db158b5500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectSwipeAfterRelease: 0
+  SWIPE_THRESHOLD: 20
+  isHeld: 0
+  la: {fileID: 589764001}
+  ra: {fileID: 420378531}
+  ll: {fileID: 1885055243}
+  rl: {fileID: 516501367}
+  mb: {fileID: 419644495}
+--- !u!114 &474756952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474756947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba8d91a3fab5c045a1659e080f24e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHeld: 0
+  la: {fileID: 589764001}
+  ra: {fileID: 420378531}
+  ll: {fileID: 1885055243}
+  rl: {fileID: 516501367}
+  mb: {fileID: 419644495}
+--- !u!82 &474756953
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1798,11 +1836,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: beae38fb39489594794bf4f3eaa1614c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7cb538aa4f00d4e4f83383db88a894a1, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1884,44 +1922,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &474756951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474756947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10f75560348c46949b0567db158b5500, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectSwipeAfterRelease: 0
-  SWIPE_THRESHOLD: 20
-  isHeld: 0
-  la: {fileID: 589764001}
-  ra: {fileID: 420378531}
-  ll: {fileID: 1885055243}
-  rl: {fileID: 516501367}
-  mb: {fileID: 419644495}
---- !u!114 &474756952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474756947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba8d91a3fab5c045a1659e080f24e37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHeld: 0
-  la: {fileID: 589764001}
-  ra: {fileID: 420378531}
-  ll: {fileID: 1885055243}
-  rl: {fileID: 516501367}
-  mb: {fileID: 419644495}
 --- !u!1 &475005991
 GameObject:
   m_ObjectHideFlags: 0

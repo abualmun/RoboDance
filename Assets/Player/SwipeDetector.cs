@@ -23,7 +23,12 @@ public class SwipeDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (la.isHeld || ra.isHeld || ll.isHeld || rl.isHeld || mb.isHeld) return;
+        if (la.isHeld || ra.isHeld || ll.isHeld || rl.isHeld || mb.isHeld)
+        {
+            secondPressPos = firstPressPos;
+            currentSwipe = Vector2.zero;
+            return;
+        }
         Swipe();
     }
 
@@ -122,7 +127,9 @@ public class SwipeDetector : MonoBehaviour
         void OnSwipeUp()
         {
             Debug.Log("Jump");
-            if(!GameManager.gameManager.isJumping){
+
+            if (!GameManager.gameManager.isJumping)
+            {
                 mb.StartJump();
             }
         }
