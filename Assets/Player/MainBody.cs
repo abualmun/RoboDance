@@ -29,6 +29,7 @@ public class MainBody : MonoBehaviour
     [SerializeField] float error;
     [SerializeField] float jumpHight;
     [SerializeField] float jumpInAirTime;
+    Vector3 defaultPosition;
 
 
     void Start()
@@ -41,6 +42,16 @@ public class MainBody : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isHeld)
+        {
+            MovePlayer();
+            GameManager.gameManager.returnTimer = 3;
+        }
+        else
+        {
+
+        }
+
         if (GameManager.gameManager.isJumping)
         {
             return;
@@ -53,15 +64,6 @@ public class MainBody : MonoBehaviour
         }
         joint.position = new Vector3(joint.position.x, Mathf.Sin(Mathf.Deg2Rad * (Mathf.Max(leftAngleFix - 270, 90 - rLeg.rotation.eulerAngles.z))) * yDiffrence + yDefaultPosition, joint.position.z);
 
-        if (isHeld)
-        {
-            MovePlayer();
-            GameManager.gameManager.returnTimer = 3;
-        }
-        else
-        {
-
-        }
 
     }
 
@@ -123,7 +125,7 @@ public class MainBody : MonoBehaviour
     IEnumerator Jump()
     {
         GameManager.gameManager.isJumping = true;
-        Vector3 defaultPosition = joint.position;
+        defaultPosition = joint.position;
         while (Vector3.Distance(joint.position, defaultPosition + Vector3.up * jumpHight) > 0.01f)
         {
             joint.position = Vector3.MoveTowards(joint.position, defaultPosition + Vector3.up * jumpHight, .02f);
@@ -132,6 +134,25 @@ public class MainBody : MonoBehaviour
         yield return new WaitForSeconds(jumpInAirTime);
         while (Vector3.Distance(joint.position, defaultPosition) > 0.01f)
         {
+            defaultPosition = new Vector3(joint.position.x, defaultPosition.y, defaultPosition.z);
+            joint.position = Vector3.MoveTowards(joint.position, defaultPosition, 0.02f);
+            yield return new WaitForEndOfFrame();
+        }
+        defaultPosition = joint.position;
+        GameManager.gameManager.isJumping = false;
+    }
+    public void StopJump()
+    {
+        StopAllCoroutines();
+        StartCoroutine(UnJump());
+
+    }
+    IEnumerator UnJump()
+    {
+
+        while (Vector3.Distance(joint.position, defaultPosition) > 0.01f)
+        {
+            defaultPosition = new Vector3(joint.position.x, defaultPosition.y, defaultPosition.z);
             joint.position = Vector3.MoveTowards(joint.position, defaultPosition, 0.02f);
             yield return new WaitForEndOfFrame();
         }

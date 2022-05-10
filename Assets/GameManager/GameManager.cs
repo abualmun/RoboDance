@@ -187,4 +187,8 @@ public class GameManager : MonoBehaviour
     {
         // audioSource.PlayOneShot(clock);
     }
+    public void ResetLimbs()
+    {
+        returnTimer = 0;
+    }
 }

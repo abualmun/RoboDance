@@ -136,6 +136,10 @@ public class SwipeDetector : MonoBehaviour
 
         void OnSwipeDown()
         {
+            if (GameManager.gameManager.isJumping)
+            {
+                mb.StopJump();
+            }
             //Do something when swiped down
         }
 

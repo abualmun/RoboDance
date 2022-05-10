@@ -249,8 +249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerZPosition: -1.16
-  startSpeed: 0.35
-  accelerationPerLevel: 0.05
+  startSpeed: 1.575
+  accelerationPerLevel: 0.1125
 --- !u!1 &2855795080462580807
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,10 +57,14 @@ public class MouseSwipeDetector : MonoBehaviour
                 }
             }
             // //swipe down
-            // if (currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
-            // {
-            //     Debug.Log("down swipe");
-            // }
+            if (currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+            {
+                Debug.Log("down swipe");
+                if (GameManager.gameManager.isJumping)
+                {
+                    mb.StopJump();
+                }
+            }
             // //swipe left
             // if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
             // {
